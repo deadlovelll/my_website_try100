@@ -1,0 +1,26 @@
+{% extends 'bootstrap/base.html' %}
+{% include "header.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block content %}
+    <div class="container" style="align-items: center">
+        <div>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="flashes">
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        </div>
+        <h1> Заполните Форму и Мы свяжемся с Вами!</h1>
+        <form method="post" class="col-md-6">
+            {{wtf.csrf_token}}
+            {{wtf.quick_form(contactform, novalidate=True)}}
+        </form>
+    </div>
+{% include "footer.html" %}
+{% endblock %}
+
+
